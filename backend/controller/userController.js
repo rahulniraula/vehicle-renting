@@ -2,7 +2,8 @@ const { User } = require("../model/userModel");
 const { validatePassword ,encryptPassword} = require("../util");
 
 function getUsers(req, res, next) {
-    createUser(req, res, next);
+    // createUser(req, res, next);
+    res.json(req.headers)
 }
 async function createUser(req, res, next) {
     try {

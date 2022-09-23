@@ -2,6 +2,7 @@ const express=require("express");
 const app=express();
 const cors=require("cors");
 const morgan=require("morgan")
+const verifyJwt=require("./middleware/verifyJwt");
 
 require("dotenv").config();
 
@@ -16,7 +17,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 app.use('/api',authRoutes);
-app.use('/api/users',userRoutes);
+app.use('/api/users',verifyJwt,userRoutes);
 app.use((error,req,res,next)=>{
     res.status(400).json(errorResponse(error.message));
 });
