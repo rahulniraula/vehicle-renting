@@ -1,5 +1,5 @@
-const { User } = require("../model/userModel");
-const { validatePassword ,encryptPassword} = require("../util");
+const { create } = require("../service/userService");
+const { validatePassword ,encryptPassword, successResponse} = require("../util");
 
 function getUsers(req, res, next) {
     // createUser(req, res, next);
@@ -7,20 +7,9 @@ function getUsers(req, res, next) {
 }
 async function createUser(req, res, next) {
     try {
-        const { firstName, middlename, lastName, email, password } = req.body;
-        if (!validatePassword(password)) {
-            throw new Error("Password should be atleast 6 characters long.");
-        }
-        const user = await User.create({
-            firstName,
-            middlename,
-            lastName,
-            email,
-            password:await encryptPassword(password)
-        });
-        res.json(user);
+        await create(req.body);
+        return res.json(successResponse("User Created Successfully"));
     }catch(e){
-        console.log(e);
         next(e)
     }
 }
