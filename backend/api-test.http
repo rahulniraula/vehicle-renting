@@ -27,3 +27,16 @@ content-type: application/json
 GET {{baseUrl}}/users HTTP/1.1
 content-type: application/json
 Authorization: Bearer {{loginResponse.response.body.data.token}}
+
+
+###
+POST {{baseUrl}}/vehicles HTTP/1.1
+content-type: application/json
+
+{
+    "vehicletype":"Car", "brand":"Audi",
+     "engine":"Automatic", "availability":[1,2],
+        "longitude":12.31, "latitude":43.23, 
+        "images":["ad"], "description":"desc",
+        "user":"632e0adccb1cd931d66abc63"
+}
