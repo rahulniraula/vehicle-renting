@@ -3,6 +3,7 @@ const app=express();
 const cors=require("cors");
 const morgan=require("morgan")
 const verifyJwt=require("./middleware/verifyJwt");
+const {getConfig}=require("./controller/utilController");
 
 require("dotenv").config();
 
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use('/api',authRoutes);
 app.use('/api/users',verifyJwt,userRoutes);
 app.use('/api/vehicles',vehicleRoute);
+app.use('/api/config',getConfig);
 app.use((error,req,res,next)=>{
     res.status(400).json(errorResponse(error.message));
 });
