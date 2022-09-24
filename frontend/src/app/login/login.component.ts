@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit{
       if (resp.status == 1) {
         tokenSubject.subscribe(t=>{
           localStorage.setItem("app_token",t)
-          this.router.navigate([""]);
+          this.router.navigate(["admin"]);
         });
         tokenSubject.next(resp.data.token);
       }
