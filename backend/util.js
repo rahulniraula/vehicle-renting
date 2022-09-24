@@ -1,5 +1,5 @@
 const bcrypt=require("bcrypt")
-const brands=require("../data/car_brands.json");
+const brands=require("./data/car_brands.json");
 function validateEmail(email){
     var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     return re.test(email)
@@ -27,4 +27,7 @@ function vehicleTypes(){
 function carBrands(){
     return brands;
 }
-module.exports={validatePassword,validateEmail,encryptPassword,validPassword,successResponse,errorResponse,vehicleTypes,carBrands}
+function transmissionTypes(){
+    return ["Automatic","Manual","Hybrid"];
+}
+module.exports={validatePassword,validateEmail,encryptPassword,validPassword,successResponse,errorResponse,vehicleTypes,carBrands,transmissionTypes}
