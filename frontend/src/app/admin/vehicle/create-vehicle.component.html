@@ -1,1 +1,43 @@
-<p>create-vehicle works!</p>
+<form>
+    <div class="row">
+        <div class="col-12">
+            <app-header></app-header>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 mt-4">
+            <label for="" class="control-label">Vehicle Type</label>
+            <select name="" id="" class="form-control">
+                <option value="" *ngFor="let v of configData.data.vehicleTypes">{{v}}</option>
+            </select>
+        </div>
+        <div class="col-6 mt-4">
+            <label for="" class="control-label">Vehicle Brand</label>
+            <select name="" id="" class="form-control">
+                <option value="" *ngFor="let v of configData.data.vehicleBrands">{{v}}</option>
+            </select>
+        </div>
+        <div class="col-6 mt-4">
+            <label for="" class="control-label">Transmission Type</label>
+            <select name="" id="" class="form-control">
+                <option value="" *ngFor="let v of configData.data.transmissionTypes">{{v}}</option>
+            </select>
+        </div>
+        <div class="col-6 mt-4">
+            <label for="" class="control-label">Vehical Availability</label><br>
+            <ng-container *ngFor="let day of days">
+                <input type="checkbox" style="margin-right: 2px"><span style="margin-right: 20px;">{{day}}</span>
+            </ng-container>
+            
+        </div>
+        <div class="col-6 mt-4">
+            <label for="" class="control-label">Latitude</label>
+            <input type="text" class="form-control">
+        </div>
+        <div class="col-6 mt-4">
+            <label for="" class="control-label">Longitude</label>
+            <input type="text" class="form-control">
+            <input type="checkbox" name="" id="">  Use Current Location
+        </div>
+    </div>
+</form>

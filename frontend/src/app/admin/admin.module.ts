@@ -13,6 +13,7 @@ import { ListVehicleComponent } from './vehicle/list-vehicle.component';
 import { SingleVehicleComponent } from './vehicle/single-vehicle.component';
 import { NavbarComponent } from './dashboard/navbar.component';
 import { SearchComponent } from './dashboard/search.component';
+import { HeaderComponent } from './dashboard/header.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
     SingleVehicleComponent,
     NavbarComponent,
     SearchComponent,
+    HeaderComponent
 
   ],
   imports: [

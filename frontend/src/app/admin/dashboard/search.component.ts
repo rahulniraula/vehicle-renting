@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit {
   }
 
 }
-interface IConfigResponse{
+export interface IConfigResponse{
   status:number,
   data:{
     vehicleTypes:[string],
