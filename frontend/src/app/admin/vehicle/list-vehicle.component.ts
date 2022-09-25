@@ -9,23 +9,23 @@ import { IVehicleResponse } from 'src/app/typeDefinition/IVehicleResponse';
   styleUrls: ['./list-vehicle.component.scss']
 })
 export class ListVehicleComponent implements OnInit {
-  vehicles:IVehicleRecord[]=[];
-  constructor(private http:HttpService) { }
+  vehicles: IVehicleRecord[] = [];
+  constructor(private http: HttpService) { }
 
   ngOnInit(): void {
     this.fetchVehicles()
   }
-  fetchVehicles(){
-    this.http.get<IVehicleResponse>({path:'vehicles'}).subscribe(data=>{
-      this.vehicles=data.data
+  fetchVehicles() {
+    this.http.get<IVehicleResponse>({ path: 'vehicles' }).subscribe(data => {
+      this.vehicles = data.data
     });
   }
-  deleteVehicle(id:string){
-    this.http.delete<IVehicleResponse>({path:`vehicles/${id}`}).subscribe(data=>{
-      if(data.status==1){
+  deleteVehicle(id: string) {
+    this.http.delete<IVehicleResponse>({ path: `vehicles/${id}` }).subscribe(data => {
+      if (data.status == 1) {
         this.fetchVehicles();
       }
-      
+
     });
   }
 
