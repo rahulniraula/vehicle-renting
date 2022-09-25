@@ -1,6 +1,7 @@
 const express=require("express");
-const { createVehicle } = require("../controller/vehicleController");
+const { createVehicle ,listVehicle} = require("../controller/vehicleController");
 const router=express.Router();
 
 router.post('/',createVehicle);
+router.get('/',listVehicle);
 module.exports=router;

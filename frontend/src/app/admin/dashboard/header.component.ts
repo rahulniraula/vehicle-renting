@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,12 +6,16 @@ import { Component, OnInit } from '@angular/core';
     <div style="background-color: rgb(19, 52, 241);color:white;padding:2px 10px;">
         <div class="row">
             <div class="col-6">
-                <h2>Add Vehicle</h2>
+                <h2>{{title}}</h2>
             </div>
             <div class="col-6">
+            <a [routerLink]="route">
                 <button type="button" class="btn btn-primary btn-floating pull-right mt-1">
-                    <i class="fa fa-list"></i>
+                  
+                    <i class="fa fa-{{icon}}"></i>
+                    
                   </button>
+                  </a>
             </div>
         </div>
     </div>
@@ -20,7 +24,9 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class HeaderComponent implements OnInit {
-
+  @Input() title!: string;
+  @Input() route!: string[];
+  @Input() icon!:string;
   constructor() { }
 
   ngOnInit(): void {

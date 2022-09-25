@@ -4,4 +4,7 @@ function create(vehicleInfo){
     Vehicle.create(vehicleInfo);
 
 }
-module.exports={create};
+async function list(){
+    return await Vehicle.find({});
+}
+module.exports={create,list};

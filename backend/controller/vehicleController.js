@@ -1,4 +1,4 @@
-const { create } = require("../service/vehicleService");
+const { create,list } = require("../service/vehicleService");
 const { successResponse } = require("../util");
 
 function createVehicle(req, res, next) {
@@ -6,4 +6,8 @@ function createVehicle(req, res, next) {
     res.json(successResponse());
 
 }
-module.exports = { createVehicle }
+async function listVehicle(req,res,next){
+    const data=await list();
+    res.json(successResponse(data));
+}
+module.exports = { createVehicle ,listVehicle}
