@@ -15,6 +15,9 @@ export class HttpService implements OnInit {
   get<T>({path}:{path:string}){
     return this.http.get<T>(this.baseUrl+`/${path}`);
   }
+  post<T>({path,data}:{path:string,data:any}){
+    return this.http.post<T>(this.baseUrl+`/${path}`,data);
+  }
   getConfig(){
     this.get<IConfigResponse>({path:'config'}).subscribe(data=>{
       if(data.status==1){

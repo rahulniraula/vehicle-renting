@@ -1,12 +1,9 @@
 const { create } = require("../service/vehicleService");
+const { successResponse } = require("../util");
 
 function createVehicle(req, res, next) {
-    const { vehicletype, brand, engine, availability,
-        longitude, latitude, images, description,
-        //user, booking
-    } = req.body;
-    create(req.body);
-    res.json();
+    create({...req.body,user:req.user._id});
+    res.json(successResponse());
 
 }
 module.exports = { createVehicle }

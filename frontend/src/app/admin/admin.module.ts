@@ -14,6 +14,7 @@ import { SingleVehicleComponent } from './vehicle/single-vehicle.component';
 import { NavbarComponent } from './dashboard/navbar.component';
 import { SearchComponent } from './dashboard/search.component';
 import { HeaderComponent } from './dashboard/header.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
@@ -34,11 +35,12 @@ const routes: Routes = [
     SingleVehicleComponent,
     NavbarComponent,
     SearchComponent,
-    HeaderComponent
+    HeaderComponent,
 
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     // MatToolbarModule,
     // MatListModule,
     // MatIconModule,

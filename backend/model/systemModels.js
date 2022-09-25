@@ -48,23 +48,23 @@ const bookingSchema = mongoose.Schema({
     }
 })
 const vehicleSchema = mongoose.Schema({
-    vehicletype: {
+    vehicleType: {
         type: String,
-        enum: ['Car', 'Jeep', 'Bike'],
+        enum: ['Car', 'Jeep', 'Bike','Bus'],
         required: true
     },
-    brand: {
+    vehicleBrand: {
         type: String,
         required: true
     },
-    engine: {
+    vehicleTransmission: {
         type: String,
         enum: ["Automatic", "Manual", "Hybrid"],
         required: true
     },
     availability: {
-        type: [Number],
-        enum: [0, 1, 2, 3, 4, 5, 6],
+        type: [String],
+        enum: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
         required: true
     },
     longitude: {

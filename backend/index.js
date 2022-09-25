@@ -20,7 +20,7 @@ app.use(express.json());
 
 app.use('/api',authRoutes);
 app.use('/api/users',verifyJwt,userRoutes);
-app.use('/api/vehicles',vehicleRoute);
+app.use('/api/vehicles',verifyJwt,vehicleRoute);
 app.use('/api/config',getConfig);
 app.use((error,req,res,next)=>{
     res.status(400).json(errorResponse(error.message));
