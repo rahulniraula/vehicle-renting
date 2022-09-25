@@ -42,7 +42,7 @@ import { IVehicleRecord } from 'src/app/typeDefinition/IVehicleRecord';
         </td>
       <td>
         <a [routerLink]="['','admin','vehicle',veh._id,'edit']"><span class="fa fa-edit btn btn-sm"></span></a>
-        <span class="fa fa-trash btn btn-sm btn-danger"></span>
+        <span (click)="deleteVehicle(veh._id)" class="fa fa-trash btn btn-sm btn-danger"></span>
       </td>
     </tr>
   </tbody>
@@ -53,6 +53,7 @@ import { IVehicleRecord } from 'src/app/typeDefinition/IVehicleRecord';
 })
 export class VehicleTableComponent implements OnInit {
   @Input() vehicles!: IVehicleRecord[];
+  @Input() deleteVehicle!:Function;
   constructor() { }
 
   ngOnInit(): void {

@@ -28,7 +28,7 @@
                 <!-- <app-single-vehicle></app-single-vehicle> -->
             </div>
             <div class="col-md-12">
-                <app-vehicle-table [vehicles]="vehicles"></app-vehicle-table>
+                <app-vehicle-table [vehicles]="vehicles" [deleteVehicle]="deleteVehicle.bind(this)"></app-vehicle-table>
             </div>
         </div>
 

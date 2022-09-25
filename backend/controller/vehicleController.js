@@ -1,4 +1,4 @@
-const { create,list } = require("../service/vehicleService");
+const { create,list,get,deleteItem } = require("../service/vehicleService");
 const { successResponse } = require("../util");
 
 function createVehicle(req, res, next) {
@@ -10,4 +10,12 @@ async function listVehicle(req,res,next){
     const data=await list();
     res.json(successResponse(data));
 }
-module.exports = { createVehicle ,listVehicle}
+async function getVehicle(req,res,next){
+    const data=await get(req.params.id);
+    res.json(successResponse(data));
+}
+async function deleteVehicle(req,res,next){
+    const data=await deleteItem(req.params.id);
+    res.json(successResponse(data));
+}
+module.exports = { createVehicle ,listVehicle,getVehicle,deleteVehicle}

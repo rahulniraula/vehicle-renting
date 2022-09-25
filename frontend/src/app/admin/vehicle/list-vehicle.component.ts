@@ -13,11 +13,19 @@ export class ListVehicleComponent implements OnInit {
   constructor(private http:HttpService) { }
 
   ngOnInit(): void {
-    this.fetchService()
+    this.fetchVehicles()
   }
-  fetchService(){
+  fetchVehicles(){
     this.http.get<IVehicleResponse>({path:'vehicles'}).subscribe(data=>{
       this.vehicles=data.data
+    });
+  }
+  deleteVehicle(id:string){
+    this.http.delete<IVehicleResponse>({path:`vehicles/${id}`}).subscribe(data=>{
+      if(data.status==1){
+        this.fetchVehicles();
+      }
+      
     });
   }
 
