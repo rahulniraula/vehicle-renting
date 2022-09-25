@@ -15,6 +15,8 @@ import { NavbarComponent } from './dashboard/navbar.component';
 import { SearchComponent } from './dashboard/search.component';
 import { HeaderComponent } from './dashboard/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { VehicleTableComponent } from './vehicle/vehicle-table.component';
+import { SetPriceDirective } from './vehicle/set-price.directive';
 
 
 const routes: Routes = [
@@ -22,7 +24,8 @@ const routes: Routes = [
     path: 'vehicle',
     children: [
       { path: '', component: ListVehicleComponent},
-      { path: 'create', component: CreateVehicleComponent}
+      { path: 'create', component: CreateVehicleComponent},
+      {path:':id/edit',component:CreateVehicleComponent}
     ]
   },
 
@@ -36,6 +39,8 @@ const routes: Routes = [
     NavbarComponent,
     SearchComponent,
     HeaderComponent,
+    VehicleTableComponent,
+    SetPriceDirective,
 
   ],
   imports: [

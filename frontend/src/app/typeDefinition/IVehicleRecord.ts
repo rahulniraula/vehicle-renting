@@ -1,5 +1,6 @@
 
 export interface IVehicleRecord{
+    _id:string,
     vehicleType:string,
     vehicleBrand:string,
     vehicleTransmission:string,

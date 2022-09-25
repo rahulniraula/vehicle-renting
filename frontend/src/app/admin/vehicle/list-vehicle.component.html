@@ -7,10 +7,28 @@
     <div class="col-md-3">
         <app-search></app-search>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9 mt-3">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Available Vehicles</h2>
+                
+            </div>
+            <div class="col-md-6">
+                <button class="pull-right">
+                    <i class="fa fa-list"></i>
+                    
+                </button> 
+                <button class="pull-right">
+                    <i class="fa fa-th"></i>
+                </button>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-4" *ngFor="let vec of vehicles">
-                <app-single-vehicle></app-single-vehicle>
+                <!-- <app-single-vehicle></app-single-vehicle> -->
+            </div>
+            <div class="col-md-12">
+                <app-vehicle-table [vehicles]="vehicles"></app-vehicle-table>
             </div>
         </div>
 
