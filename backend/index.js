@@ -24,7 +24,7 @@ app.use('/api/users', verifyJwt, userRoutes);
 app.use('/api/vehicles', verifyJwt, vehicleRoute);
 app.use('/api/config', getConfig);
 app.use('/api/upload-file', upload.single('files'), (req, res, next) => {
-    res.json(successResponse({ url: 'http://localhost:3000/public/' + req.fileName }));
+    res.json(successResponse({ url: `${process.env.APP_BACK_URL}/public/` + req.fileName }));
 });
 app.use((error, req, res, next) => {
     res.status(400).json(errorResponse(error.message));
