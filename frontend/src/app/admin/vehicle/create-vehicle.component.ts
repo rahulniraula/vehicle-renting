@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import * as moment from 'moment';
 import { HttpService } from 'src/app/http.service';
 import { vehicleTypesSubject } from 'src/app/localState';
 import { IVehicleRecord } from 'src/app/typeDefinition/IVehicleRecord';
@@ -21,20 +22,34 @@ export class CreateVehicleComponent implements OnInit {
     }
   };
   days: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-  createForm = this.fb.group({
+  public createForm = this.fb.group({
     vehicleType: ["", Validators.required],
     vehicleBrand: ["", Validators.required],
     vehicleTransmission: ["", Validators.required],
     availability: this.fb.array([]),
+    prices: this.fb.array([]),
     latitude: [0],
     longitude: [0],
     useCurrentLocation: [false],
   });
+
+  minDate: string = moment().format("YYYY-MM-DD");
+  maxDate: string = moment().add(7, 'days').format("YYYY-MM-DD");
   constructor(private http: HttpService,
     private fb: FormBuilder,
-    private activeRoute:ActivatedRoute,
+    private activeRoute: ActivatedRoute,
     private router: Router) { }
 
+  getPrices() {
+    return this.createForm.controls.prices as FormArray;
+  }
+
+  addNewRow({date="",price=0}) {
+    this.getPrices().push(this.fb.group({
+      date: [date, Validators.required],
+      price: [price, Validators.required]
+    }));
+  }
   ngOnInit(): void {
     this.http.getConfig();
     vehicleTypesSubject.subscribe(data => {
@@ -43,28 +58,31 @@ export class CreateVehicleComponent implements OnInit {
     this.createForm.controls['useCurrentLocation'].valueChanges.subscribe(data => {
       data ? this.getLocation() : null;
     });
-    this.activeRoute.params.subscribe((u)=>{
-      if(u['id']){
-        console.log("In Edit mode");
+    this.activeRoute.params.subscribe((u) => {
+      if (u['id']) {
         this.fetchRecord(u['id']);
       }
     });
   }
-  fetchRecord(id:string){
-    this.http.get<IVehicleResponse>({path:`vehicles/${id}`}).subscribe(data=>{
-      
-      if(data.status==1 && data.data.length==1){
-        let vehicleRecord=data.data[0];
-        const checkboxes: FormArray<FormControl> = this.createForm.get('availability') as FormArray;
-        checkboxes.push(new FormControl("Sunday"))
+  fetchRecord(id: string) {
+    this.http.get<IVehicleResponse>({ path: `vehicles/${id}` }).subscribe(data => {
+
+      if (data.status == 1 && data.data.length == 1) {
+        let vehicleRecord = data.data[0];
+        // const checkboxes: FormArray<FormControl> = this.createForm.get('availability') as FormArray;
+        // checkboxes.push(new FormControl("Sunday"))
         this.createForm.patchValue({
-          vehicleType:vehicleRecord.vehicleType,
-          vehicleBrand:vehicleRecord.vehicleBrand,
-          vehicleTransmission:vehicleRecord.vehicleTransmission,
-          availability:vehicleRecord.availability,
-          latitude:vehicleRecord.latitude,
-          longitude:vehicleRecord.longitude
+          vehicleType: vehicleRecord.vehicleType,
+          vehicleBrand: vehicleRecord.vehicleBrand,
+          vehicleTransmission: vehicleRecord.vehicleTransmission,
+          availability: vehicleRecord.availability,
+          prices:vehicleRecord.prices,
+          latitude: vehicleRecord.latitude,
+          longitude: vehicleRecord.longitude
         });
+        vehicleRecord.prices?.forEach(p=>{
+          this.addNewRow({date:p.date,price:p.price});
+        })
       }
     });
   }
@@ -84,12 +102,25 @@ export class CreateVehicleComponent implements OnInit {
       console.warn(`ERROR(${err.code}): ${err.message}`);
     }, options);
   }
+  isEditMode(){
+    return this.activeRoute.snapshot.params["id"];
+  }
   submitForm() {
-    this.http.post<{ status: number }>({ path: 'vehicles', data: this.createForm.value }).subscribe(data => {
-      if (data.status == 1) {
-        this.router.navigate(['', 'admin', 'vehicle']);
-      }
-    });
+    const id = this.activeRoute.snapshot.params["id"];
+    if(this.isEditMode()){
+      this.http.patch<{ status: number }>({path:'vehicles/'+id,data:this.createForm.value}).subscribe(data=>{
+        if (data.status == 1) {
+          this.router.navigate(['', 'admin', 'vehicle']);
+        }
+      });
+    }else{
+      this.http.post<{ status: number }>({ path: 'vehicles', data: this.createForm.value }).subscribe(data => {
+        if (data.status == 1) {
+          this.router.navigate(['', 'admin', 'vehicle']);
+        }
+      });
+    }
+
   }
   onCheckboxChange(e: { target: { checked: boolean; value: any; }; }) {
     const checkboxes: FormArray<FormControl> = this.createForm.get('availability') as FormArray;

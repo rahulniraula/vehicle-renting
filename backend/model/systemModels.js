@@ -47,6 +47,14 @@ const bookingSchema = mongoose.Schema({
         required: true
     }
 })
+const priceSchema=mongoose.Schema({
+    date:{
+        type:String,
+    },
+    price:{
+        type:Number,
+    }
+})
 const vehicleSchema = mongoose.Schema({
     vehicleType: {
         type: String,
@@ -76,6 +84,9 @@ const vehicleSchema = mongoose.Schema({
         type: Number,
         required: true
     },
+    prices:{
+        type:[priceSchema]
+    },
     images: {
         type: [String],
         required: true
@@ -92,5 +103,6 @@ const vehicleSchema = mongoose.Schema({
         required:true
     }
 })
+
 
 module.exports.Vehicle = mongoose.model("Vehicle", vehicleSchema);

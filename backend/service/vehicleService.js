@@ -13,4 +13,7 @@ async function get(id){
 async function deleteItem(id){
     return await Vehicle.deleteOne({_id:id});
 }
-module.exports={create,list,get,deleteItem};
+async function patchItem(id,data){
+    return await Vehicle.updateOne({_id:id},data);
+}
+module.exports={create,list,get,deleteItem,patchItem};

@@ -37,8 +37,8 @@ import { IVehicleRecord } from 'src/app/typeDefinition/IVehicleRecord';
       <td>
         {{veh.latitude}} {{veh.longitude}}
       </td>
-      <td>
-        Senior
+      <td [innerHTML]="formatPrices(veh.prices!)">
+        
         </td>
       <td>
         <a [routerLink]="['','admin','vehicle',veh._id,'edit']"><span class="fa fa-edit btn btn-sm"></span></a>
@@ -57,6 +57,11 @@ export class VehicleTableComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+  formatPrices(prices:[{date:string,price:number}]){
+    return prices.map(p=>{
+      return `${p.date} = ${p.price}<br>`
+    }).join(" ")
   }
 
 }

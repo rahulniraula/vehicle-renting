@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 // import { MatIconModule } from '@angular/material/icon';
 // import {MatCardModule} from '@angular/material/card';
 // import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import { CreateVehicleComponent } from './vehicle/create-vehicle.component';
 import { ListVehicleComponent } from './vehicle/list-vehicle.component';
@@ -51,6 +52,7 @@ const routes: Routes = [
     // MatIconModule,
     // MatCardModule,
     // MatGridListModule,
+    MatDatepickerModule,
     RouterModule.forChild(routes)
   ]
 })

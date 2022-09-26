@@ -21,6 +21,9 @@ export class HttpService implements OnInit {
   delete<T>({path}:{path:string}){
     return this.http.delete<T>(this.baseUrl+`/${path}`);
   }
+  patch<T>({path,data}:{path:string,data:any}){
+    return this.http.patch<T>(this.baseUrl+`/${path}`,data);
+  }
   getConfig(){
     this.get<IConfigResponse>({path:'config'}).subscribe(data=>{
       if(data.status==1){
