@@ -1,30 +1,34 @@
-const express=require("express");
-const app=express();
-const cors=require("cors");
-const morgan=require("morgan")
-const verifyJwt=require("./middleware/verifyJwt");
-const {getConfig}=require("./controller/utilController");
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const morgan = require("morgan")
+const verifyJwt = require("./middleware/verifyJwt");
+const { getConfig } = require("./controller/utilController");
 
 require("dotenv").config();
 
-const port=process.env.APP_PORT || 3000;
+const port = process.env.APP_PORT || 3000;
 
-const authRoutes=require("./routes/authRoute");
-const userRoutes=require("./routes/userRoute");
-const vehicleRoute=require("./routes/vehicleRoute");
-const { errorResponse } = require("./util");
+const authRoutes = require("./routes/authRoute");
+const userRoutes = require("./routes/userRoute");
+const vehicleRoute = require("./routes/vehicleRoute");
+const { errorResponse, successResponse } = require("./util");
+const { upload } = require("./config/multer");
 
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
-
-app.use('/api',authRoutes);
-app.use('/api/users',verifyJwt,userRoutes);
-app.use('/api/vehicles',verifyJwt,vehicleRoute);
-app.use('/api/config',getConfig);
-app.use((error,req,res,next)=>{
+app.use('/public', express.static('assets/pics'));
+app.use('/api', authRoutes);
+app.use('/api/users', verifyJwt, userRoutes);
+app.use('/api/vehicles', verifyJwt, vehicleRoute);
+app.use('/api/config', getConfig);
+app.use('/api/upload-file', upload.single('files'), (req, res, next) => {
+    res.json(successResponse({ url: 'http://localhost:3000/public/' + req.fileName }));
+});
+app.use((error, req, res, next) => {
     res.status(400).json(errorResponse(error.message));
 });
-app.listen(port,()=>{
+app.listen(port, () => {
     console.log(`Application Listening on port ${port}`);
 })

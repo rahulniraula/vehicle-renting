@@ -27,6 +27,7 @@ export class CreateVehicleComponent implements OnInit {
     vehicleBrand: ["", Validators.required],
     vehicleTransmission: ["", Validators.required],
     availability: this.fb.array([]),
+    images:["",Validators.required],
     prices: this.fb.array([]),
     latitude: [0],
     longitude: [0],
@@ -93,6 +94,19 @@ export class CreateVehicleComponent implements OnInit {
           //console.log(this.getAvailability());TODO
         });
       }
+    });
+  }
+  fileSelected(f:Event){
+    const element = f.target as HTMLInputElement;
+    const formData=new FormData();
+    // element.files[0].
+    formData.append("files",element.files![0]);
+    console.log(element.files![0].name);
+    this.http.post<{status:number,data:{url:string}}>({path:'upload-file',data:formData}).subscribe(data=>{
+      this.createForm.patchValue({
+        images:data.data.url
+      });
+      console.log(data);
     });
   }
   getLocation() {
