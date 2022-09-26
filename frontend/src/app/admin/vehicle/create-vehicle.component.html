@@ -26,11 +26,12 @@
                 <option value="{{v}}" *ngFor="let v of configData.data.transmissionTypes">{{v}}</option>
             </select>
         </div>
-        <div class="col-6 mt-4">
+        <div class="col-6 mt-4" formArrayName="availability">
             <label for="" class="control-label">Vehical Availability</label><br>
             <ng-container *ngFor="let day of days;let index=index">
-                <input type="checkbox" style="margin-right: 2px" value="{{day}}"
-                    (change)="onCheckboxChange($any($event))">
+                <input type="checkbox" style="margin-right: 2px" value="{{day}}" [formControlName]="index"
+                    (change)="onCheckboxChange($any($event))"
+                    >
                 <span style="margin-right: 20px;">{{day}}</span>
             </ng-container>
 

@@ -43,6 +43,9 @@ export class CreateVehicleComponent implements OnInit {
   getPrices() {
     return this.createForm.controls.prices as FormArray;
   }
+  getAvailability(){
+    return this.createForm.controls.availability as FormArray;
+  }
 
   addNewRow({date="",price=0}) {
     this.getPrices().push(this.fb.group({
@@ -63,6 +66,9 @@ export class CreateVehicleComponent implements OnInit {
         this.fetchRecord(u['id']);
       }
     });
+    this.days.forEach(n=>{
+      this.getAvailability().push(new FormControl(false))
+    });
   }
   fetchRecord(id: string) {
     this.http.get<IVehicleResponse>({ path: `vehicles/${id}` }).subscribe(data => {
@@ -75,7 +81,7 @@ export class CreateVehicleComponent implements OnInit {
           vehicleType: vehicleRecord.vehicleType,
           vehicleBrand: vehicleRecord.vehicleBrand,
           vehicleTransmission: vehicleRecord.vehicleTransmission,
-          availability: vehicleRecord.availability,
+          // availability: vehicleRecord.availability,
           prices:vehicleRecord.prices,
           latitude: vehicleRecord.latitude,
           longitude: vehicleRecord.longitude
@@ -83,6 +89,9 @@ export class CreateVehicleComponent implements OnInit {
         vehicleRecord.prices?.forEach(p=>{
           this.addNewRow({date:p.date,price:p.price});
         })
+        vehicleRecord.availability.forEach(a=>{
+          //console.log(this.getAvailability());TODO
+        });
       }
     });
   }
