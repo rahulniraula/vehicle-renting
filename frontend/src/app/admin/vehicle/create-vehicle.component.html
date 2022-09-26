@@ -27,7 +27,7 @@
             </select>
         </div>
         <div class="col-6 mt-4">
-            <label for="" class="control-label">Vehical Availability</label><br>
+            <label for="" class="control-label">Availability</label><br>
             <ng-container *ngFor="let day of days;let index=index">
                 <input type="checkbox" style="margin-right: 2px" value="{{day}}" 
                     (change)="onCheckboxChange($any($event))"
@@ -35,6 +35,10 @@
                 <span style="margin-right: 20px;">{{day}}</span>
             </ng-container>
 
+        </div>
+        <div class="col-12 mt-4">
+            <label for="" class="control-label">Vehicle Description</label>
+            <textarea name="" id="" cols="30" rows="10" class="form-control" formControlName="description"></textarea>
         </div>
         <div class="col-6 mt-4">
             <label for="" class="control-label">Latitude</label>

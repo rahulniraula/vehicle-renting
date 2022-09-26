@@ -47,18 +47,18 @@ const bookingSchema = mongoose.Schema({
         required: true
     }
 })
-const priceSchema=mongoose.Schema({
-    date:{
-        type:String,
+const priceSchema = mongoose.Schema({
+    date: {
+        type: Date,
     },
-    price:{
-        type:Number,
+    price: {
+        type: Number,
     }
 })
 const vehicleSchema = mongoose.Schema({
     vehicleType: {
         type: String,
-        enum: ['Car', 'Jeep', 'Bike','Bus'],
+        enum: ['Car', 'Jeep', 'Bike', 'Bus'],
         required: true
     },
     vehicleBrand: {
@@ -75,6 +75,10 @@ const vehicleSchema = mongoose.Schema({
         enum: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
         required: true
     },
+    description: {
+        type: String,
+        required: true
+    },
     longitude: {
         type: Number,
         required: true
@@ -84,8 +88,8 @@ const vehicleSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    prices:{
-        type:[priceSchema]
+    prices: {
+        type: [priceSchema]
     },
     images: {
         type: [String],
@@ -98,9 +102,25 @@ const vehicleSchema = mongoose.Schema({
         type: bookingSchema,
         require: false
     },
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-        required:true
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    }
+}, {
+    virtuals: {
+        todaysRate: {
+            get() {
+                let filt=this.prices.filter(i=>i.date>new Date());
+                filt.sort((a,b)=>a.date-b.date)
+                return filt[0].price;
+            }
+        }
+    },
+    toObject: {
+        virtuals: true
+    },
+    toJSON: {
+        virtuals: true
     }
 })
 

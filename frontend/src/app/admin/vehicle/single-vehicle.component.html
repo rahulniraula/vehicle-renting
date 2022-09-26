@@ -1,13 +1,15 @@
 <div class="card">
     <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-      <img src="https://mdbcdn.b-cdn.net/img/new/standard/nature/111.webp" class="img-fluid"/>
+      <img [src]="vehicle.images![0]" class="img-fluid"/>
       <a href="#!">
         <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
       </a>
     </div>
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#!" class="btn btn-primary">Button</a>
+      <h2 class="card-title">{{vehicle.vehicleBrand}} </h2>
+      <!-- <span class="text-muted">{{vehicle.vehicleTransmission}}</span> -->
+      <p class="card-text text-justify" style="text-align: justify">{{truncate(vehicle.description)}}</p>
+      <button class="btn btn-success "><span class="fa fa-dollar"></span> {{vehicle.todaysRate}}/Hrs</button>
+      <a href="#!" class="btn btn-primary pull-right">Book Now</a>
     </div>
   </div>

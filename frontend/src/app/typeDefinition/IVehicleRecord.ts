@@ -7,6 +7,8 @@ export interface IVehicleRecord{
     vehicleBrand:string,
     vehicleTransmission:string,
     availability:string[],
+    description:string,
+    todaysRate?:number,
     latitude:number,
     longitude:number,
     useCurrentLocation?:boolean

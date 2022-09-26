@@ -27,6 +27,7 @@ export class CreateVehicleComponent implements OnInit {
     vehicleBrand: ["", Validators.required],
     vehicleTransmission: ["", Validators.required],
     availability: this.fb.array([]),
+    description:["",Validators.required],
     images:["",Validators.required],
     prices: this.fb.array([]),
     latitude: [0],
@@ -83,6 +84,7 @@ export class CreateVehicleComponent implements OnInit {
           vehicleBrand: vehicleRecord.vehicleBrand,
           vehicleTransmission: vehicleRecord.vehicleTransmission,
           // availability: vehicleRecord.availability,
+          description:vehicleRecord.description,
           prices:vehicleRecord.prices,
           latitude: vehicleRecord.latitude,
           longitude: vehicleRecord.longitude

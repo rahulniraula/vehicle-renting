@@ -11,7 +11,7 @@ import { IVehicleResponse } from 'src/app/typeDefinition/IVehicleResponse';
 export class ListVehicleComponent implements OnInit {
   vehicles: IVehicleRecord[] = [];
   constructor(private http: HttpService) { }
-
+  defaultView='grid';
   ngOnInit(): void {
     this.fetchVehicles()
   }

@@ -1,3 +1,4 @@
+const moment = require("moment/moment");
 const { Vehicle } = require("../model/systemModels");
 
 function create(vehicleInfo){
@@ -5,7 +6,7 @@ function create(vehicleInfo){
 
 }
 async function list(){
-    return await Vehicle.find({});
+    return await Vehicle.find({"prices.date":{$gte:moment(moment().format("YYYY-MM-DD"))}},{"prices._id":0});
 }
 async function get(id){
     return await Vehicle.find({_id:id});
