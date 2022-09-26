@@ -67,9 +67,9 @@ export class CreateVehicleComponent implements OnInit {
         this.fetchRecord(u['id']);
       }
     });
-    this.days.forEach(n=>{
-      this.getAvailability().push(new FormControl(false))
-    });
+    // this.days.forEach(n=>{
+      // this.getAvailability().push(new FormControl(false))
+    // });
   }
   fetchRecord(id: string) {
     this.http.get<IVehicleResponse>({ path: `vehicles/${id}` }).subscribe(data => {

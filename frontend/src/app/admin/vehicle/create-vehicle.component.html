@@ -26,10 +26,10 @@
                 <option value="{{v}}" *ngFor="let v of configData.data.transmissionTypes">{{v}}</option>
             </select>
         </div>
-        <div class="col-6 mt-4" formArrayName="availability">
+        <div class="col-6 mt-4">
             <label for="" class="control-label">Vehical Availability</label><br>
             <ng-container *ngFor="let day of days;let index=index">
-                <input type="checkbox" style="margin-right: 2px" value="{{day}}" [formControlName]="index"
+                <input type="checkbox" style="margin-right: 2px" value="{{day}}" 
                     (change)="onCheckboxChange($any($event))"
                     >
                 <span style="margin-right: 20px;">{{day}}</span>
@@ -45,6 +45,10 @@
             <input type="text" class="form-control" formControlName="longitude">
             <input type="checkbox" name="" id="" formControlName="useCurrentLocation"> Use Current Location
         </div>
+        <div class="col-md-12 mt-4">
+            <label for="">Upload Images</label>
+            <input type="file" class="form-control" (change)="fileSelected($event)">
+        </div>
         <div class="col-12 mt-4" formArrayName="prices">
             <label for="" class="control-label">Pricing Details</label><span class="fa fa-plus btn btn-sm"
                 (click)="addNewRow({})"></span>
@@ -57,10 +61,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 mt-4">
-            <label for="">Upload Images</label>
-            <input type="file" class="form-control" (change)="fileSelected($event)">
-        </div>
+        
         <div class="col-12 mt-4">
             <button type="submit" class="btn btn-primary btn-block"> {{isEditMode()?'Update':'Create'}}</button>
         </div>
