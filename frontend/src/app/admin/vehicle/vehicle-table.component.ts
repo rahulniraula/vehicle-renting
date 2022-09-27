@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { IVehicleRecord } from 'src/app/typeDefinition/IVehicleRecord';
 
 @Component({
@@ -60,7 +61,7 @@ export class VehicleTableComponent implements OnInit {
   }
   formatPrices(prices:[{date:string,price:number}]){
     return prices.map(p=>{
-      return `${p.date} = ${p.price}<br>`
+      return `${moment(p.date).format("MM-DD-YYYY")} = ${p.price}<br>`
     }).join(" ")
   }
 
