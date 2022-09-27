@@ -2,12 +2,10 @@ const moment = require("moment/moment");
 const { Vehicle } = require("../model/systemModels");
 const { sanitizeObject } = require("../util");
 
-function create(vehicleInfo) {
-    Vehicle.create(vehicleInfo);
-
+async function create(vehicleInfo) {
+    await Vehicle.create(vehicleInfo);
 }
 async function list(query) {
-    console.log(query)
     return await Vehicle.find(
         {
             "prices.date": { $gte: moment(moment().format("YYYY-MM-DD")) },...sanitizeObject(query)

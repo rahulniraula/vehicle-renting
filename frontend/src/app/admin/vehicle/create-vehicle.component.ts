@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 import { HttpService } from 'src/app/http.service';
 import { vehicleTypesSubject } from 'src/app/localState';
 import { IVehicleRecord } from 'src/app/typeDefinition/IVehicleRecord';
@@ -27,8 +28,8 @@ export class CreateVehicleComponent implements OnInit {
     vehicleBrand: ["", Validators.required],
     vehicleTransmission: ["", Validators.required],
     availability: this.fb.array([]),
-    description:["",Validators.required],
-    images:["",Validators.required],
+    description: ["", Validators.required],
+    images: ["", Validators.required],
     prices: this.fb.array([]),
     latitude: [0],
     longitude: [0],
@@ -40,16 +41,18 @@ export class CreateVehicleComponent implements OnInit {
   constructor(private http: HttpService,
     private fb: FormBuilder,
     private activeRoute: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private toaster: ToastrService
+  ) { }
 
   getPrices() {
     return this.createForm.controls.prices as FormArray;
   }
-  getAvailability(){
+  getAvailability() {
     return this.createForm.controls.availability as FormArray;
   }
 
-  addNewRow({date="",price=0}) {
+  addNewRow({ date = "", price = 0 }) {
     this.getPrices().push(this.fb.group({
       date: [date, Validators.required],
       price: [price, Validators.required]
@@ -69,7 +72,7 @@ export class CreateVehicleComponent implements OnInit {
       }
     });
     // this.days.forEach(n=>{
-      // this.getAvailability().push(new FormControl(false))
+    // this.getAvailability().push(new FormControl(false))
     // });
   }
   fetchRecord(id: string) {
@@ -84,29 +87,29 @@ export class CreateVehicleComponent implements OnInit {
           vehicleBrand: vehicleRecord.vehicleBrand,
           vehicleTransmission: vehicleRecord.vehicleTransmission,
           // availability: vehicleRecord.availability,
-          description:vehicleRecord.description,
-          prices:vehicleRecord.prices,
+          description: vehicleRecord.description,
+          prices: vehicleRecord.prices,
           latitude: vehicleRecord.latitude,
           longitude: vehicleRecord.longitude
         });
-        vehicleRecord.prices?.forEach(p=>{
-          this.addNewRow({date:p.date,price:p.price});
+        vehicleRecord.prices?.forEach(p => {
+          this.addNewRow({ date: p.date, price: p.price });
         })
-        vehicleRecord.availability.forEach(a=>{
+        vehicleRecord.availability.forEach(a => {
           //console.log(this.getAvailability());TODO
         });
       }
     });
   }
-  fileSelected(f:Event){
+  fileSelected(f: Event) {
     const element = f.target as HTMLInputElement;
-    const formData=new FormData();
+    const formData = new FormData();
     // element.files[0].
-    formData.append("files",element.files![0]);
+    formData.append("files", element.files![0]);
     console.log(element.files![0].name);
-    this.http.post<{status:number,data:{url:string}}>({path:'upload-file',data:formData}).subscribe(data=>{
+    this.http.post<{ status: number, data: { url: string } }>({ path: 'upload-file', data: formData }).subscribe(data => {
       this.createForm.patchValue({
-        images:data.data.url
+        images: data.data.url
       });
       console.log(data);
     });
@@ -127,22 +130,31 @@ export class CreateVehicleComponent implements OnInit {
       console.warn(`ERROR(${err.code}): ${err.message}`);
     }, options);
   }
-  isEditMode(){
+  isEditMode() {
     return this.activeRoute.snapshot.params["id"];
   }
   submitForm() {
     const id = this.activeRoute.snapshot.params["id"];
-    if(this.isEditMode()){
-      this.http.patch<{ status: number }>({path:'vehicles/'+id,data:this.createForm.value}).subscribe(data=>{
+    if (this.isEditMode()) {
+      this.http.patch<{ status: number,message:string }>({ path: 'vehicles/' + id, data: this.createForm.value }).subscribe(data => {
         if (data.status == 1) {
           this.router.navigate(['', 'admin', 'vehicle']);
+        } else {
+          this.toaster.error(data.message)
         }
+      },error=>{
+        this.toaster.error(error.error.message);
       });
-    }else{
-      this.http.post<{ status: number }>({ path: 'vehicles', data: this.createForm.value }).subscribe(data => {
+    } else {
+      this.http.post<{ status: number,message:string }>({ path: 'vehicles', data: this.createForm.value }).subscribe(data => {
+        console.log(data)
         if (data.status == 1) {
           this.router.navigate(['', 'admin', 'vehicle']);
+        }else {
+          this.toaster.error(data.message)
         }
+      },error=>{
+        this.toaster.error(error.error.message);
       });
     }
 
