@@ -36,7 +36,7 @@ import { IVehicleRecord } from 'src/app/typeDefinition/IVehicleRecord';
         <p class="text-muted mb-0">IT department</p>
       </td>
       <td>
-        {{veh.latitude}} {{veh.longitude}}
+        {{veh.location}}
       </td>
       <td [innerHTML]="formatPrices(veh.prices!)">
         
