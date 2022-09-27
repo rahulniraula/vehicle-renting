@@ -1,1 +1,58 @@
-<p>register works!</p>
+<div class="container-fluid" style="background-image: url('/assets/bg.jpg');height:100vh;background-size: cover;">
+    <!-- <img src="/assets/bg.jpg" alt=""> -->
+    <div class="row">
+      
+      <div class="offset-4 col-md-4 card" style="margin-top:15%">
+        <div class="card-body">
+          <h1 class="text-center bg-primary text-white p-2">Register</h1>
+          <form [formGroup]="registrationForm" novalidate (ngSubmit)="onSubmit()">
+            
+            <div class=" mb-4">
+                <label class="form-label">First Name</label>
+                <input type="email" class="form-control" formControlName="firstName"/>   
+              </div>
+              <div class=" mb-4">
+                <label class="form-label">Last Name</label>
+                <input type="email" class="form-control" formControlName="lastName"/>   
+              </div>
+              <!-- Email input -->
+            <div class=" mb-4">
+              <label class="form-label">Email address</label>
+              <input type="email" class="form-control" formControlName="email"/>   
+            </div>
+            <div class=" mb-4">
+                <label class="form-label">Role</label>
+                <select class="form-control" formControlName="role">
+                    <option value="Customer">Customer</option>
+                    <option value="Driver">Driver</option>
+                </select>
+              </div>
+          
+            <!-- Password input -->
+            <div class=" mb-4">
+              <label class="form-label" >Password</label>
+              <input type="password"  class="form-control" formControlName="password"/>
+            </div>
+            <div class=" mb-4">
+                <label class="form-label" >Confirm Password</label>
+                <input type="password"  class="form-control" formControlName="confirmPassword"/>
+              </div>
+          
+            <!-- 2 column grid layout for inline styling -->
+            <div class="row mb-4">
+              
+          
+              <div class="col">
+                <!-- Simple link -->
+                <a [routerLink]="['','login']">Already a Member? Login</a>
+              </div>
+            </div>
+          
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -7,13 +7,13 @@
         <h1 class="text-center bg-primary text-white p-2">Login</h1>
         <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
           <!-- Email input -->
-          <div class="form-outline mb-4">
+          <div class=" mb-4">
             <label class="form-label">Email address</label>
             <input type="email" class="form-control" formControlName="email"/>   
           </div>
         
           <!-- Password input -->
-          <div class="form-outline mb-4">
+          <div class=" mb-4">
             <label class="form-label" >Password</label>
             <input type="password"  class="form-control" formControlName="password"/>
           </div>
@@ -30,7 +30,7 @@
         
             <div class="col">
               <!-- Simple link -->
-              <a href="#!">Forgot password?</a>
+              <a [routerLink]="['','register']">Register a New Account</a>
             </div>
           </div>
         

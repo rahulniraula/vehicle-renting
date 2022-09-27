@@ -2,7 +2,7 @@ const { User } = require("../model/systemModels");
 const { validatePassword, encryptPassword } = require("../util");
 
 async function create(userData) {
-    const { firstName, middlename, lastName, email, password } = userData;
+    const { firstName, middlename, lastName, email, password,role } = userData;
     if (!validatePassword(password)) {
         throw new Error("Password should be atleast 6 characters long.");
     }
@@ -11,6 +11,7 @@ async function create(userData) {
         middlename,
         lastName,
         email,
+        role,
         password: await encryptPassword(password)
     });
     return user;
