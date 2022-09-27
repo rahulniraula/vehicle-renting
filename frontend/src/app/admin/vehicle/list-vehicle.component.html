@@ -11,23 +11,25 @@
         <div class="row">
             <div class="col-md-6">
                 <h2>Available Vehicles</h2>
-                
+
             </div>
             <div class="col-md-6">
                 <button class="pull-right" (click)="defaultView='list'">
-                    <i class="fa fa-list"></i>    
-                </button> 
+                    <i class="fa fa-list"></i>
+                </button>
                 <button class="pull-right" (click)="defaultView='grid'">
                     <i class="fa fa-th"></i>
                 </button>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4" *ngFor="let vec of vehicles" >
-                <app-single-vehicle *ngIf="defaultView=='grid'" [vehicle]="vec"></app-single-vehicle>
+            
+            <div class="col-md-4" *ngFor="let vec of vehicles">
+                <app-single-vehicle *ngIf="defaultView=='grid'" [vehicle]="vec" (vehicleBooked)="vehicleBooked($event)"></app-single-vehicle>
             </div>
             <div class="col-md-12">
-                <app-vehicle-table *ngIf="defaultView=='list'" [vehicles]="vehicles" [deleteVehicle]="deleteVehicle.bind(this)"></app-vehicle-table>
+                <app-vehicle-table *ngIf="defaultView=='list'" [vehicles]="vehicles"
+                    [deleteVehicle]="deleteVehicle.bind(this)"></app-vehicle-table>
             </div>
         </div>
 

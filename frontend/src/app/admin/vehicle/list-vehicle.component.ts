@@ -12,6 +12,7 @@ export class ListVehicleComponent implements OnInit {
   vehicles: IVehicleRecord[] = [];
   constructor(private http: HttpService) { }
   defaultView='grid';
+  selectedVehicle:IVehicleRecord|null=null;
   ngOnInit(): void {
     this.fetchVehicles()
   }
@@ -27,6 +28,9 @@ export class ListVehicleComponent implements OnInit {
       }
 
     });
+  }
+  vehicleBooked(vehicle:IVehicleRecord){
+    this.selectedVehicle=vehicle;
   }
 
 }

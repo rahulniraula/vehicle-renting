@@ -7,7 +7,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 // import { MatIconModule } from '@angular/material/icon';
 // import {MatCardModule} from '@angular/material/card';
 // import {MatGridListModule} from '@angular/material/grid-list';
-import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import { CreateVehicleComponent } from './vehicle/create-vehicle.component';
 import { ListVehicleComponent } from './vehicle/list-vehicle.component';
@@ -18,6 +17,7 @@ import { HeaderComponent } from './dashboard/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { VehicleTableComponent } from './vehicle/vehicle-table.component';
 import { SetPriceDirective } from './vehicle/set-price.directive';
+import { ModalComponent } from './modal/modal.component';
 
 
 const routes: Routes = [
@@ -42,17 +42,12 @@ const routes: Routes = [
     HeaderComponent,
     VehicleTableComponent,
     SetPriceDirective,
+    ModalComponent,
 
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    // MatToolbarModule,
-    // MatListModule,
-    // MatIconModule,
-    // MatCardModule,
-    // MatGridListModule,
-    MatDatepickerModule,
     RouterModule.forChild(routes)
   ]
 })
