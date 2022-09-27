@@ -117,7 +117,13 @@ const vehicleSchema = mongoose.Schema({
     },
     images: {
         type: [String],
-        required: true
+        required: true,
+        validate:{
+            validator(v){
+                return v[0]
+            },
+            message:'Please provide atleast one image'
+        }
     },
     description: {
         type: String,
