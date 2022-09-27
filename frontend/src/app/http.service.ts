@@ -12,8 +12,8 @@ export class HttpService implements OnInit {
   ngOnInit(): void {
     
   }
-  get<T>({path}:{path:string}){
-    return this.http.get<T>(this.baseUrl+`/${path}`);
+  get<T>({path,params}:{path:string,params?:{}}){
+    return this.http.get<T>(this.baseUrl+`/${path}`,{params:params});
   }
   post<T>({path,data}:{path:string,data:any}){
     return this.http.post<T>(this.baseUrl+`/${path}`,data);

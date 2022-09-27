@@ -7,7 +7,7 @@ function createVehicle(req, res, next) {
 
 }
 async function listVehicle(req,res,next){
-    const data=await list();
+    const data=await list(req.query);
     res.json(successResponse(data));
 }
 async function getVehicle(req,res,next){

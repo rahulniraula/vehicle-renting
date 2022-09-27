@@ -16,8 +16,8 @@ export class ListVehicleComponent implements OnInit {
   ngOnInit(): void {
     this.fetchVehicles()
   }
-  fetchVehicles() {
-    this.http.get<IVehicleResponse>({ path: 'vehicles' }).subscribe(data => {
+  fetchVehicles(params?:{}) {
+    this.http.get<IVehicleResponse>({ path: 'vehicles',params }).subscribe(data => {
       this.vehicles = data.data
     });
   }
@@ -31,6 +31,10 @@ export class ListVehicleComponent implements OnInit {
   }
   vehicleBooked(vehicle:IVehicleRecord){
     this.selectedVehicle=vehicle;
+  }
+  onSearch(d:{}){
+    this.fetchVehicles(d);
+    console.log(d);
   }
 
 }

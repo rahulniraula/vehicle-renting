@@ -30,4 +30,14 @@ function carBrands(){
 function transmissionTypes(){
     return ["Automatic","Manual","Hybrid"];
 }
-module.exports={validatePassword,validateEmail,encryptPassword,validPassword,successResponse,errorResponse,vehicleTypes,carBrands,transmissionTypes}
+function sanitizeObject(obj){
+    let o={};
+    for(let k in obj){
+        if(obj[k]){
+            o[k]=obj[k]
+        }
+
+    }
+    return o;
+}
+module.exports={validatePassword,validateEmail,encryptPassword,validPassword,successResponse,errorResponse,vehicleTypes,carBrands,transmissionTypes,sanitizeObject}

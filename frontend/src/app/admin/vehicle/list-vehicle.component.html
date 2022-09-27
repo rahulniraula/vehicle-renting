@@ -5,7 +5,7 @@
 </div>
 <div class="row">
     <div class="col-md-3">
-        <app-search></app-search>
+        <app-search (onSearch)="onSearch($event)"></app-search>
     </div>
     <div class="col-md-9 mt-3">
         <div class="row">
@@ -22,7 +22,7 @@
                 </button>
             </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="vehicles.length>0;else noContent">
             
             <div class="col-md-4" *ngFor="let vec of vehicles">
                 <app-single-vehicle *ngIf="defaultView=='grid'" [vehicle]="vec" (vehicleBooked)="vehicleBooked($event)"></app-single-vehicle>
@@ -32,6 +32,11 @@
                     [deleteVehicle]="deleteVehicle.bind(this)"></app-vehicle-table>
             </div>
         </div>
+        <ng-template #noContent>
+            <div class="row alert alert-danger">
+                <div class="col-md-12">No Vehicles found according to your Preferences.</div>
+            </div>
+        </ng-template>
 
     </div>
 </div>
