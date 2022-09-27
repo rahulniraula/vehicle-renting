@@ -1,15 +1,16 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { HttpService } from '../http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpService,private toaster:ToastrService) { }
 
   login(data:ILoginRequest){
-    return this.http.post<{ status: number, data: { token: string } }>("http://localhost:3000/api/login", data)
+    this.http.post<{ status: number, data: { token: string } }>({path:'login',data})
   }
 }
 export interface ILoginRequest{

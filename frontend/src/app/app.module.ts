@@ -5,11 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatCardModule } from '@angular/material/card';
+// import { MatInputModule } from '@angular/material/input';
+// import { MatButtonModule } from '@angular/material/button';
+// import { MatSelectModule } from '@angular/material/select';
+// import { MatRadioModule } from '@angular/material/radio';
+// import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RegisterComponent } from './user/register/register.component';
@@ -26,11 +26,11 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatRadioModule,
-    MatCardModule,
+    // MatInputModule,
+    // MatButtonModule,
+    // MatSelectModule,
+    // MatRadioModule,
+    // MatCardModule,
     ReactiveFormsModule,
     HttpClientModule,
     ToastrModule.forRoot()

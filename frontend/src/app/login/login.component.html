@@ -1,32 +1,43 @@
-<div class="login-form-wrapper">
-  <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
-    <mat-card class="shipping-card">
-      <mat-card-header>
-        <mat-card-title color="green">Login Form</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="row">
-          <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Email Address" formControlName="email">
-            </mat-form-field>
+<div class="container-fluid" style="background-image: url('/assets/bg.jpg');height:100vh;background-size: cover;">
+  <!-- <img src="/assets/bg.jpg" alt=""> -->
+  <div class="row">
+    
+    <div class="offset-4 col-md-4 card" style="margin-top:15%">
+      <div class="card-body">
+        <h1 class="text-center bg-primary text-white p-2">Login</h1>
+        <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <label class="form-label">Email address</label>
+            <input type="email" class="form-control" formControlName="email"/>   
           </div>
-        </div>
         
-        <div class="row">
-          <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput  placeholder="Password" type="password"
-                formControlName="password">
-            </mat-form-field>
+          <!-- Password input -->
+          <div class="form-outline mb-4">
+            <label class="form-label" >Password</label>
+            <input type="password"  class="form-control" formControlName="password"/>
           </div>
-        </div>
         
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" type="submit">Submit</button>
-      </mat-card-actions>
-    </mat-card>
-  </form>
-
+          <!-- 2 column grid layout for inline styling -->
+          <div class="row mb-4">
+            <div class="col d-flex justify-content-center">
+              <!-- Checkbox -->
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" checked />
+                <label class="form-check-label" > Remember me </label>
+              </div>
+            </div>
+        
+            <div class="col">
+              <!-- Simple link -->
+              <a href="#!">Forgot password?</a>
+            </div>
+          </div>
+        
+          <!-- Submit button -->
+          <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
