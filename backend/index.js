@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const path=require('path');
 const morgan = require("morgan")
 const verifyJwt = require("./middleware/verifyJwt");
 const { getConfig } = require("./controller/utilController");
@@ -12,7 +13,7 @@ const port = process.env.APP_PORT || 3000;
 const authRoutes = require("./routes/authRoute");
 const userRoutes = require("./routes/userRoute");
 const vehicleRoute = require("./routes/vehicleRoute");
-const { errorResponse, successResponse } = require("./util");
+const { errorResponse, successResponse, uploadToS3 } = require("./util");
 const { upload } = require("./config/multer");
 
 app.use(cors());
@@ -23,8 +24,10 @@ app.use('/api', authRoutes);
 app.use('/api/users', verifyJwt, userRoutes);
 app.use('/api/vehicles', verifyJwt, vehicleRoute);
 app.use('/api/config', getConfig);
-app.use('/api/upload-file', upload.single('files'), (req, res, next) => {
-    res.json(successResponse({ url: `${process.env.APP_BACK_URL}/public/` + req.fileName }));
+app.use('/api/upload-file', upload.single('files'), async (req, res, next) => {
+    let data=await uploadToS3(path.join(__dirname,'assets','pics',req.fileName));
+    // console.log(data);
+    res.json(successResponse({ url: data.Location }));
 });
 app.use((error, req, res, next) => {
     res.status(400).json(errorResponse(error.message));
