@@ -26,7 +26,6 @@ app.use('/api/vehicles', verifyJwt, vehicleRoute);
 app.use('/api/config', getConfig);
 app.use('/api/upload-file', upload.single('files'), async (req, res, next) => {
     let data=await uploadToS3(path.join(__dirname,'assets','pics',req.fileName));
-    // console.log(data);
     res.json(successResponse({ url: data.Location }));
 });
 app.use((error, req, res, next) => {
