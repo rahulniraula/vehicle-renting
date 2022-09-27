@@ -45,6 +45,10 @@ const bookingSchema = mongoose.Schema({
     confirmed: {
         type: Boolean,
         required: true
+    },
+    userId:{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
     }
 })
 const priceSchema = mongoose.Schema({
@@ -102,7 +106,7 @@ const vehicleSchema = mongoose.Schema({
         type: bookingSchema,
         require: false
     },
-    user: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
     }

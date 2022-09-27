@@ -20,6 +20,7 @@ import { SetPriceDirective } from './vehicle/set-price.directive';
 import { ModalComponent } from './modal/modal.component';
 
 
+
 const routes: Routes = [
   {
     path: 'vehicle',

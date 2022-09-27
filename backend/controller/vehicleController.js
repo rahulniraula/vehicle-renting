@@ -1,4 +1,4 @@
-const { create,list,get,deleteItem,patchItem } = require("../service/vehicleService");
+const { create,list,get,deleteItem,patchItem,bookItem } = require("../service/vehicleService");
 const { successResponse } = require("../util");
 
 function createVehicle(req, res, next) {
@@ -23,4 +23,14 @@ async function patchVehicle(req,res,next){
     res.json(successResponse(data));
 
 }
-module.exports = { createVehicle ,listVehicle,getVehicle,deleteVehicle,patchVehicle}
+async function bookVehicle(req,res,next){
+    try{
+        const data=await bookItem(req);
+        
+        res.json(successResponse(data));
+    }catch(e){
+        next(e)
+    }
+    
+}
+module.exports = { createVehicle ,listVehicle,getVehicle,deleteVehicle,patchVehicle,bookVehicle}

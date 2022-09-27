@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RegisterComponent } from './user/register/register.component';
 import { AttachTokenInterceptor } from './attach-token.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AttachTokenInterceptor } from './attach-token.interceptor';
     MatCardModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ToastrModule.forRoot()
     
     
   ],
