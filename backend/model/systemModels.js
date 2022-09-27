@@ -100,7 +100,8 @@ const vehicleSchema = mongoose.Schema({
         required: true
     },
     description: {
-        type: String
+        type: String,
+        required: true
     },
     bookings: {
         type: bookingSchema,
