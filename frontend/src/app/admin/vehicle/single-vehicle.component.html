@@ -1,19 +1,23 @@
 <div class="card">
   <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
     <img [src]="vehicle.images![0]" class="img-fluid" />
-    <a href="#!">
-      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-    </a>
+    
   </div>
   <div class="card-body">
     <h2 class="card-title">{{vehicle.vehicleBrand}} </h2>
     <!-- <span class="text-muted">{{vehicle.vehicleTransmission}}</span> -->
     <p class="card-text text-justify" style="text-align: justify">{{truncate(vehicle.description)}}</p>
-    <button class="btn btn-success "><span class="fa fa-dollar"></span> {{vehicle.todaysRate}}/Hrs</button>
+    <button class="btn btn-success "> {{vehicle.todaysRate|currency}}/Hrs</button>
     <a (click)="bookNow(vehicle)" class="btn btn-primary pull-right" type="button" data-mdb-toggle="modal"
       [attr.data-mdb-target]="'#modal'+vehicle._id">Book Now</a>
     <app-modal [vehicle]="vehicle">
-
+      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <img [src]="vehicle.images![0]" class="img-fluid" /> 
+      </div>
+      <div class="card-body text-justify" style="text-align: justify">
+        {{vehicle.description}}
+        <button class="btn btn-block btn-primary" (click)="confirmBooking()">Confirm Booking</button>
+      </div>
     </app-modal>
   </div>
 </div>

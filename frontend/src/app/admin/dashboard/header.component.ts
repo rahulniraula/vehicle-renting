@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-header',
   template: `
-    <div style="background-color: rgb(19, 52, 241);color:white;padding:2px 10px;">
+    <div style="color:white;padding:2px 10px;" class="bg-primary">
         <div class="row">
             <div class="col-6">
                 <h2>{{title}}</h2>

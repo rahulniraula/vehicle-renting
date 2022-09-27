@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-// @ts-ignore
-import {Modal} from 'mdb-ui-kit';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { IVehicleRecord } from 'src/app/typeDefinition/IVehicleRecord';
+
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -9,11 +8,12 @@ import { IVehicleRecord } from 'src/app/typeDefinition/IVehicleRecord';
 })
 export class ModalComponent implements OnInit {
   @Input() vehicle!:IVehicleRecord;
+
   constructor() { }
 
   ngOnInit(): void {
-    // const modal=new Modal()
-    // modal.show();
+    
   }
+  
 
 }

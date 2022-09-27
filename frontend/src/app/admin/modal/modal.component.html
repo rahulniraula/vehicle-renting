@@ -1,12 +1,8 @@
-<!-- Button trigger modal -->
-
-
-<!-- Modal -->
 <div class="modal fade" [id]="'modal'+vehicle._id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="exampleModalLabel" style="margin:0px">Book {{vehicle.vehicleBrand}}</h2>
+                <h2 class="modal-title" id="exampleModalLabel" style="margin:0px">Book {{vehicle.vehicleBrand}} at {{vehicle.todaysRate|currency}}/Hrs</h2>
                 <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
