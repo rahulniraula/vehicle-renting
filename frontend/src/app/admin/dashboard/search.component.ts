@@ -16,7 +16,9 @@ export class SearchComponent implements OnInit {
   public searchForm = this.fb.group({
     vehicleBrand:[""],
     vehicleType:[""],
-    vehicleTransmission:[""]
+    vehicleTransmission:[""],
+    latitude:[0],
+    longitude:[0]
 
   });
   ngOnInit(): void {
@@ -34,6 +36,21 @@ export class SearchComponent implements OnInit {
   search(){
     console.log(this.searchForm.value);
     this.onSearch.emit(this.searchForm.value);
+  }
+  async checkboxClicked(e: { target: { checked: boolean; value: any; }; }){
+    if(e.target.checked){
+      let loc=await this.httpService.getLocation();
+      this.searchForm.patchValue({
+        latitude:loc.latitude,
+        longitude:loc.longitude
+      });
+      console.log(loc);
+    } else{
+      this.searchForm.patchValue({
+        latitude:0,
+        longitude:0
+      });
+    }   
   }
 
 }

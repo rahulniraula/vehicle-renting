@@ -6,10 +6,15 @@ async function create(vehicleInfo) {
     await Vehicle.create(vehicleInfo);
 }
 async function list(query) {
+    let criteria={
+        "prices.date": { $gte: moment(moment().format("YYYY-MM-DD")) },...sanitizeObject(query,"latitude","longitude")
+    }
+    if(query.latitude && query.latitude!=0 && query.longitude && query.longitude!=0){
+        console.log("Entered");
+        criteria.location={"$near":[query.longitude,query.latitude]};
+    }
     return await Vehicle.find(
-        {
-            "prices.date": { $gte: moment(moment().format("YYYY-MM-DD")) },...sanitizeObject(query)
-        },
+        criteria,
         { "prices._id": 0 });
 }
 async function get(id) {
@@ -19,7 +24,7 @@ async function deleteItem(id) {
     return await Vehicle.deleteOne({ _id: id });
 }
 async function patchItem(id, data) {
-    return await Vehicle.updateOne({ _id: id }, data);
+    return await Vehicle.updateOne({ _id: id }, {data,location:[data.longitude,data.latitude]});
 }
 async function bookItem(req) {
     let res = await Vehicle.updateOne(

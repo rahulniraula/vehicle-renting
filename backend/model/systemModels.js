@@ -54,9 +54,23 @@ const bookingSchema = mongoose.Schema({
 const priceSchema = mongoose.Schema({
     date: {
         type: Date,
+        require:true,
+        validate:{
+            validator:function(v){
+                return v;
+            },
+            message:'Please input a valid date for price'
+        }
     },
     price: {
         type: Number,
+        required:true,
+        validate:{
+            validator:function(v){
+                return v;
+            },
+            message:'Please input a valid price'
+        }
     }
 })
 const vehicleSchema = mongoose.Schema({
@@ -83,17 +97,23 @@ const vehicleSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    longitude: {
-        type: Number,
-        required: true
-    },
+    location:{
+        type:[Number],
+        required:true,
+        validate:{
+            validator(v){
+                if(v[0]==0 || v[1]==0){
+                    return false
+                }
+                return true;
+            },
+            message:'Please provide valid location coordinates'
 
-    latitude: {
-        type: Number,
-        required: true
+        },
     },
     prices: {
-        type: [priceSchema]
+        type: [priceSchema],
+        required:true
     },
     images: {
         type: [String],
@@ -128,6 +148,7 @@ const vehicleSchema = mongoose.Schema({
         virtuals: true
     }
 })
+vehicleSchema.index({location:'2d'})
 
 
 module.exports.Vehicle = mongoose.model("Vehicle", vehicleSchema);

@@ -11,5 +11,6 @@ export interface IVehicleRecord{
     todaysRate?:number,
     latitude:number,
     longitude:number,
+    location:number[]
     useCurrentLocation?:boolean
   }

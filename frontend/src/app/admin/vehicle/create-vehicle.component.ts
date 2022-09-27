@@ -42,7 +42,7 @@ export class CreateVehicleComponent implements OnInit {
     private fb: FormBuilder,
     private activeRoute: ActivatedRoute,
     private router: Router,
-    private toaster: ToastrService
+    private toaster: ToastrService,
   ) { }
 
   getPrices() {
@@ -71,6 +71,7 @@ export class CreateVehicleComponent implements OnInit {
         this.fetchRecord(u['id']);
       }
     });
+    this.addNewRow({});
     // this.days.forEach(n=>{
     // this.getAvailability().push(new FormControl(false))
     // });
@@ -89,8 +90,8 @@ export class CreateVehicleComponent implements OnInit {
           // availability: vehicleRecord.availability,
           description: vehicleRecord.description,
           prices: vehicleRecord.prices,
-          latitude: vehicleRecord.latitude,
-          longitude: vehicleRecord.longitude
+          latitude: vehicleRecord.location[1],
+          longitude: vehicleRecord.location[0]
         });
         vehicleRecord.prices?.forEach(p => {
           this.addNewRow({ date: p.date, price: p.price });
@@ -114,21 +115,12 @@ export class CreateVehicleComponent implements OnInit {
       console.log(data);
     });
   }
-  getLocation() {
-    const options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    };
-    navigator.geolocation.getCurrentPosition((pos: { coords: { latitude: number, longitude: number, accuracy: number } }) => {
-      const crd = pos.coords;
-      this.createForm.patchValue({
-        latitude: crd.latitude,
-        longitude: crd.longitude
-      });
-    }, (err: { message: string, code: number }) => {
-      console.warn(`ERROR(${err.code}): ${err.message}`);
-    }, options);
+  async getLocation() {
+    let crd=await this.http.getLocation();
+    this.createForm.patchValue({
+      latitude: crd.latitude,
+      longitude: crd.longitude
+    });
   }
   isEditMode() {
     return this.activeRoute.snapshot.params["id"];

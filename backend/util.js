@@ -30,10 +30,10 @@ function carBrands(){
 function transmissionTypes(){
     return ["Automatic","Manual","Hybrid"];
 }
-function sanitizeObject(obj){
+function sanitizeObject(obj,...except){
     let o={};
     for(let k in obj){
-        if(obj[k]){
+        if(except.indexOf(k)==-1 && obj[k]){
             o[k]=obj[k]
         }
 

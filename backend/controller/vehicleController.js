@@ -4,7 +4,7 @@ const { successResponse } = require("../util");
 
 async function createVehicle(req, res, next) {
     try {
-        await create({ ...req.body, user: req.user._id });
+        await create({ ...req.body, userId: req.user._id,location:[req.body.longitude,req.body.latitude] });
         res.json(successResponse());
     } catch (e) {
         next(e);

@@ -31,5 +31,22 @@ export class HttpService implements OnInit {
       }
     });;
   }
+  
+  getLocation(){
+    return new Promise<{latitude:number,longitude:number}>((resolve,reject)=>{
+      const options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      };
+      navigator.geolocation.getCurrentPosition((pos: { coords: { latitude: number, longitude: number, accuracy: number } }) => {
+        const crd = pos.coords;
+        resolve(crd);
+      }, (err: { message: string, code: number }) => {
+        reject(err);
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+      }, options);
+    });
+  }
 
 }
