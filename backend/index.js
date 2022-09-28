@@ -5,6 +5,7 @@ const path=require('path');
 const morgan = require("morgan")
 const verifyJwt = require("./middleware/verifyJwt");
 const { getConfig } = require("./controller/utilController");
+const fs=require("fs")
 
 require("dotenv").config();
 
@@ -20,6 +21,7 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use('/public', express.static('assets/pics'));
+app.use('/static',express.static('static'))
 app.use('/api', authRoutes);
 app.use('/api/users', verifyJwt, userRoutes);
 app.use('/api/vehicles', verifyJwt, vehicleRoute);
@@ -28,6 +30,10 @@ app.use('/api/upload-file', upload.single('files'), async (req, res, next) => {
     let data=await uploadToS3(path.join(__dirname,'assets','pics',req.fileName));
     res.json(successResponse({ url: data.Location }));
 });
+app.get('*',(req,res)=>{
+    let f=fs.createReadStream(path.join(__dirname,"static","index.html"));
+    f.pipe(res);
+})
 app.use((error, req, res, next) => {
     res.status(400).json(errorResponse(error.message));
 });
