@@ -9,7 +9,7 @@ import { tokenSubject } from './localState';
 })
 export class AppComponent implements OnInit{
 
-  title = 'frontend';
+  title = 'Vehicle Renting System';
   constructor(private router:Router){
 
   }
