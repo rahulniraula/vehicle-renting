@@ -10,7 +10,6 @@ async function list(query) {
         "prices.date": { $gte: moment(moment().format("YYYY-MM-DD")) },...sanitizeObject(query,"latitude","longitude")
     }
     if(query.latitude && query.latitude!=0 && query.longitude && query.longitude!=0){
-        console.log("Entered");
         criteria.location={"$near":[query.longitude,query.latitude]};
     }
     return await Vehicle.find(

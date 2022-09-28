@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { tokenSubject } from 'src/app/localState';
 
 @Component({
   selector: 'app-navbar',
@@ -23,23 +24,24 @@ import { Component, OnInit } from '@angular/core';
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- Navbar brand -->
       <a class="navbar-brand mt-2 mt-lg-0" href="#">
-        <img
+        <!-- <img
           src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
           height="15"
           alt="MDB Logo"
           loading="lazy"
-        />
+        /> -->
+        <p class="text-bold">Vehicle Rental System</p>
       </a>
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#">Dashboard</a>
+          <a class="nav-link" [routerLink]="['','admin','vehicle']">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Team</a>
+          <a class="nav-link" [routerLink]="['','admin','vehicle']">For Drivers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Projects</a>
+          <a class="nav-link" [routerLink]="['','admin','vehicle']">We are Hiring</a>
         </li>
       </ul>
       <!-- Left links -->
@@ -64,7 +66,6 @@ import { Component, OnInit } from '@angular/core';
           aria-expanded="false"
         >
           <i class="fas fa-bell"></i>
-          <span class="badge rounded-pill badge-notification bg-danger">1</span>
         </a>
         <ul
           class="dropdown-menu dropdown-menu-end"
@@ -104,13 +105,13 @@ import { Component, OnInit } from '@angular/core';
           aria-labelledby="navbarDropdownMenuAvatar"
         >
           <li>
-            <a class="dropdown-item" href="#">My profile</a>
+            <a class="dropdown-item" [routerLink]="['','admin','vehicle']">My profile</a>
           </li>
           <li>
-            <a class="dropdown-item" href="#">Settings</a>
+            <a class="dropdown-item" [routerLink]="['','admin','vehicle']">Settings</a>
           </li>
           <li>
-            <a class="dropdown-item" href="#">Logout</a>
+            <a class="dropdown-item" style="cursor: pointer;" (click)="logout()">Logout</a>
           </li>
         </ul>
       </div>
@@ -128,6 +129,10 @@ export class NavbarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+  logout(){
+    tokenSubject.next("")
+    localStorage.clear();
   }
 
 }
