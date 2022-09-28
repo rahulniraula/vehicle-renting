@@ -24,7 +24,7 @@ async function deleteItem(id) {
     return await Vehicle.deleteOne({ _id: id });
 }
 async function patchItem(id, data) {
-    return await Vehicle.updateOne({ _id: id }, {data,location:[data.longitude,data.latitude]});
+    return await Vehicle.updateOne({ _id: id }, {...data,location:[data.longitude,data.latitude]});
 }
 async function bookItem(req) {
     let res = await Vehicle.updateOne(
