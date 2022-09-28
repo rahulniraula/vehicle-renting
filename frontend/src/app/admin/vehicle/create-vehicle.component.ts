@@ -4,7 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { HttpService } from 'src/app/http.service';
-import { vehicleTypesSubject } from 'src/app/localState';
+import { tokenSubject, vehicleTypesSubject } from 'src/app/localState';
 import { IVehicleRecord } from 'src/app/typeDefinition/IVehicleRecord';
 import { IVehicleResponse } from 'src/app/typeDefinition/IVehicleResponse';
 import { IConfigResponse } from '../dashboard/search.component';
@@ -72,9 +72,9 @@ export class CreateVehicleComponent implements OnInit {
       }
     });
     this.addNewRow({});
-    // this.days.forEach(n=>{
-    // this.getAvailability().push(new FormControl(false))
-    // });
+
+    console.log(this.getUserDetails());
+    
   }
   fetchRecord(id: string) {
     this.http.get<IVehicleResponse>({ path: `vehicles/${id}` }).subscribe(data => {
@@ -165,6 +165,9 @@ export class CreateVehicleComponent implements OnInit {
         i++;
       });
     }
+  }
+  getUserDetails(){
+    return this.http.decodeJWT(localStorage.getItem("app_token"));
   }
 
 }

@@ -8,7 +8,7 @@ async function login(email,password){
         throw new Error("No User found");
     }
     if(validPassword(password,user.password)){
-        let token=jwt.sign(user.toObject(),process.env.JWT_SECRET);
+        let token=jwt.sign({...user.toObject(),password:null},process.env.JWT_SECRET);
         return {token};
     }
 }

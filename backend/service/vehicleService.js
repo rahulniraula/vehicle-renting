@@ -5,12 +5,16 @@ const { sanitizeObject } = require("../util");
 async function create(vehicleInfo) {
     await Vehicle.create(vehicleInfo);
 }
-async function list(query) {
+async function list(query,user) {
     let criteria={
         "prices.date": { $gte: moment(moment().format("YYYY-MM-DD")) },...sanitizeObject(query,"latitude","longitude")
     }
     if(query.latitude && query.latitude!=0 && query.longitude && query.longitude!=0){
         criteria.location={"$near":[query.longitude,query.latitude]};
+    }
+    if(user.role=="Driver"){
+        
+        criteria.userId=user._id
     }
     return await Vehicle.find(
         criteria,

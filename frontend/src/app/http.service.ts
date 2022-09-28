@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { IConfigResponse } from './admin/dashboard/search.component';
 import { vehicleTypesSubject } from './localState';
-
+//@ts-ignore
+import jwt_decode from "jwt-decode";
 @Injectable({
   providedIn: 'root'
 })
@@ -47,6 +48,11 @@ export class HttpService implements OnInit {
         console.warn(`ERROR(${err.code}): ${err.message}`);
       }, options);
     });
+  }
+  decodeJWT(token:string|null){
+    if(typeof token=="string"){
+      return jwt_decode(token)
+    }
   }
 
 }

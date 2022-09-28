@@ -11,8 +11,9 @@ async function createVehicle(req, res, next) {
     }
 }
 async function listVehicle(req, res, next) {
+    // console.log(req.user)
     try {
-        const data = await list(req.query);
+        const data = await list(req.query,req.user);
         res.json(successResponse(data));
     } catch (e) {
         next(e);
