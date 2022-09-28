@@ -49,10 +49,8 @@ export class HttpService implements OnInit {
       }, options);
     });
   }
-  decodeJWT(token:string|null){
-    if(typeof token=="string"){
-      return jwt_decode(token)
-    }
+  decodeJWT():{role:string}{
+    return jwt_decode(localStorage.getItem("app_token")||"")
   }
 
 }

@@ -14,7 +14,7 @@
 
             </div>
             <div class="col-md-6">
-                <button class="pull-right" (click)="defaultView='list'">
+                <button *ngIf="isDriver" class="pull-right" (click)="defaultView='list'">
                     <i class="fa fa-list"></i>
                 </button>
                 <button class="pull-right" (click)="defaultView='grid'">

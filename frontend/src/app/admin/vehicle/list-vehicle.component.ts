@@ -10,11 +10,19 @@ import { IVehicleResponse } from 'src/app/typeDefinition/IVehicleResponse';
 })
 export class ListVehicleComponent implements OnInit {
   vehicles: IVehicleRecord[] = [];
+  isDriver=true;
   constructor(private http: HttpService) { }
   defaultView='grid';
   selectedVehicle:IVehicleRecord|null=null;
   ngOnInit(): void {
     this.fetchVehicles()
+    let user=this.http.decodeJWT();
+    if(user.role=="Driver"){
+      this.isDriver=true;
+    }else{
+      this.isDriver=false;
+    }
+    
   }
   fetchVehicles(params?:{}) {
     this.http.get<IVehicleResponse>({ path: 'vehicles',params }).subscribe(data => {

@@ -73,7 +73,6 @@ export class CreateVehicleComponent implements OnInit {
     });
     this.addNewRow({});
 
-    console.log(this.getUserDetails());
     
   }
   fetchRecord(id: string) {
@@ -166,9 +165,7 @@ export class CreateVehicleComponent implements OnInit {
       });
     }
   }
-  getUserDetails(){
-    return this.http.decodeJWT(localStorage.getItem("app_token"));
-  }
+  
 
 }
 
